@@ -1,0 +1,14 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { questionSchema, retrieve, validateClaims, type Source, type Passage } from '../src/lib/knowledge';
+const sources:Source[]=[{id:'a',title:'Release',category:'Plan',updated:'2026-11-10',description:'Public demo'}, {id:'b',title:'Other',category:'Plan',updated:'2026-11-10',description:'Not selected'}];
+const passages:Passage[]=[{id:'a-1',sourceId:'a',heading:'Release approval',text:'Mobile review and keyboard checks must pass before launch.'},{id:'b-1',sourceId:'b',heading:'Secret budget',text:'The budget is 9000.'}];
+test('retrieval restricts results to selected sources',()=>{assert.equal(retrieve('budget',['a'],sources,passages).length,0);});
+test('retrieval returns relevant passage with stable citation id',()=>{const results=retrieve('mobile review before launch',['a'],sources,passages);assert.equal(results[0].id,'a-1');assert.ok(results[0].coverage>=.5);});
+test('unrelated question returns honest empty evidence',()=>{assert.deepEqual(retrieve('office wifi password',['a','b'],sources,passages),[]);});
+test('stop-word-only query does not match all documents',()=>assert.deepEqual(retrieve('what is it',['a'],sources,passages),[]));
+test('unknown and mixed citation IDs reject entire draft',()=>{const evidence=retrieve('mobile review',['a'],sources,passages);assert.equal(validateClaims({sufficient:true,claims:[{text:'A claim',citations:['a-1','invented']}],limitation:''},evidence),false);});
+test('claim without citations cannot pass',()=>assert.equal(validateClaims({sufficient:true,claims:[{text:'Unsupported',citations:[]}],limitation:''},[]),false));
+test('no claims cannot masquerade as an answer',()=>assert.equal(validateClaims({sufficient:true,claims:[],limitation:''},[]),false));
+test('valid references accepted without asserting semantic truth',()=>{const evidence=retrieve('mobile review',['a'],sources,passages);assert.equal(validateClaims({sufficient:true,claims:[{text:'Mobile review is required',citations:['a-1']}],limitation:'Sample'},evidence),true);});
+test('selection, question, consent and unexpected fields validated',()=>{assert.equal(questionSchema.safeParse({question:'launch',sources:[],consent:true}).success,false);assert.equal(questionSchema.safeParse({question:'launch',sources:['a'],consent:true,path:'../../private'}).success,false);assert.equal(questionSchema.safeParse({question:'x'.repeat(601),sources:['a'],consent:true}).success,false);assert.equal(questionSchema.safeParse({question:'launch',sources:['a'],consent:false}).success,true);});

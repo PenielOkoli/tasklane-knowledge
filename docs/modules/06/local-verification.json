@@ -1,0 +1,39 @@
+{
+  "checkedAt": "2026-11-10T19:10:16.506Z",
+  "url": "http://localhost:3017",
+  "liveRequested": false,
+  "passed": true,
+  "checks": [
+    {
+      "name": "pages and source metadata",
+      "passed": true,
+      "detail": {
+        "configured": false
+      }
+    },
+    {
+      "name": "source search does not claim AI generation",
+      "passed": true
+    },
+    {
+      "name": "unknown context abstains",
+      "passed": true
+    },
+    {
+      "name": "source selection restricts every passage",
+      "passed": true
+    },
+    {
+      "name": "empty selection, unknown source and extra fields rejected",
+      "passed": true
+    },
+    {
+      "name": "passage access requires session and rejects unknown ID",
+      "passed": true
+    },
+    {
+      "name": "cross origin and oversized bodies rejected",
+      "passed": true
+    }
+  ]
+}
