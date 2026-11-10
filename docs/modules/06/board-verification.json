@@ -1,0 +1,51 @@
+{
+  "checkedAt": "2026-11-10T19:20:41.411Z",
+  "url": "https://tasklane-knowledge.vercel.app",
+  "liveRequested": true,
+  "passed": true,
+  "checks": [
+    {
+      "name": "pages",
+      "passed": true
+    },
+    {
+      "name": "isolated sessions and secure cookie",
+      "passed": true
+    },
+    {
+      "name": "unknown tool rejected and logged",
+      "passed": true
+    },
+    {
+      "name": "archive approval gate and cross-session isolation",
+      "passed": true
+    },
+    {
+      "name": "rollback restores archive",
+      "passed": true
+    },
+    {
+      "name": "simulated failure, retry, replay prevention, rollback",
+      "passed": true
+    },
+    {
+      "name": "server ownership and stale revision checks",
+      "passed": true
+    },
+    {
+      "name": "HTTP boundary checks",
+      "passed": true
+    },
+    {
+      "name": "real AI search tool",
+      "passed": true,
+      "detail": {
+        "matches": 2
+      }
+    },
+    {
+      "name": "real AI mutation proposal requires approval",
+      "passed": true
+    }
+  ]
+}

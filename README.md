@@ -7,7 +7,7 @@ Continues Tasklane's project task desk with selected project documents, grounded
 ## Links and evidence
 
 - Repository: https://github.com/PenielOkoli/tasklane-knowledge
-- Live deployment: pending final verification; see `docs/modules/06/submission.md`.
+- Live deployment: https://tasklane-knowledge.vercel.app
 - [Assessment mapping](docs/modules/06/assessment.md)
 - [Implementation plan and provenance](docs/modules/06/plan.md)
 - [Verification](docs/modules/06/verification.md)
@@ -28,7 +28,7 @@ Source selection → validate session and source IDs → lexical passage retriev
 
 Search works without AI consent. Synthesis sends only the question and up to four matching excerpts to Groq. The corpus is server-only and intentionally consists of fictional public project documents. The API returns metadata and bounded matching passages, never an arbitrary file or full document. This implements the curriculum's source-selection option; private uploads are not supported.
 
-The answer's confidence label is heuristic, not a probability. Valid citation IDs do not guarantee semantic entailment. Users can inspect each cited passage, and the interface explicitly states this limitation. Lexical retrieval can miss synonyms or retrieve weak keyword matches. Provider failures preserve evidence without fabricating an answer.
+The answer's confidence label is heuristic, not a probability. Valid citation IDs do not guarantee semantic entailment. Users can inspect each cited passage, and the interface explicitly states this limitation. Lexical retrieval can miss synonyms or retrieve weak keyword matches. Provider failures preserve evidence without fabricating an answer. The retained board model can occasionally omit a proposal; manual controls remain available and all actual changes still require approval. See the verification record for observed failures and successful final checks.
 
 ## Controls and retention
 
@@ -42,3 +42,4 @@ The user explicitly chose to continue Tasklane for number 6 in a new repository 
 
 - https://ai-sdk.dev/docs/ai-sdk-core/generating-structured-data — structured schema output used by synthesis.
 - https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling — preserved board tool workflow.
+

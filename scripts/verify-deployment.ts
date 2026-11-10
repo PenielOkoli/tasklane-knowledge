@@ -43,10 +43,11 @@ async function main(){
   });
   if(live){
     await check('real AI search tool',async()=>{const before=JSON.stringify(a.workspace!.tasks);const r=await call(a,'propose',{prompt:'Find all high-priority tasks. Do not change anything.',revision:revision()});assert.equal(r.status,200);assert.equal(r.body.source,'ai');assert.equal(JSON.stringify(a.workspace!.tasks),before);assert.equal(a.workspace!.proposal,null);assert.ok(a.workspace!.logs.some(l=>l.toolName==='searchTasks'&&l.status==='succeeded'));return {matches:r.body.matches?.length};});
-    await check('real AI mutation proposal requires approval',async()=>{const r=await call(a,'propose',{prompt:'Set the priority of Review mobile layouts (tsk-mobile) to high. Propose only this one change.',revision:revision()});assert.equal(r.status,200);assert.equal(a.workspace!.proposal?.source,'ai');assert.equal(a.workspace!.proposal?.action.toolName,'setPriority');assert.equal(a.workspace!.tasks.find(t=>t.id==='tsk-mobile')!.priority,'medium');
+    await check('real AI mutation proposal requires approval',async()=>{const r=await call(a,'propose',{prompt:'Set the priority of Review mobile layouts (tsk-mobile) to high. Propose only this one change.',revision:revision()});assert.equal(r.status,200);assert.equal(a.workspace!.proposal?.source,'ai',JSON.stringify({message:r.body.message,tasks:a.workspace!.tasks,logs:a.workspace!.logs}));assert.equal(a.workspace!.proposal?.action.toolName,'setPriority');assert.equal(a.workspace!.tasks.find(t=>t.id==='tsk-mobile')!.priority,'medium');
       assert.equal((await call(a,'decide',decision())).status,200);assert.equal(a.workspace!.tasks.find(t=>t.id==='tsk-mobile')!.priority,'high');assert.equal((await call(a,'undo',{undoId:a.workspace!.undo!.id,revision:revision()})).status,200);assert.equal(a.workspace!.tasks.find(t=>t.id==='tsk-mobile')!.priority,'medium');});
   }
   const report={checkedAt:new Date().toISOString(),url:base,liveRequested:live,passed:checks.every(c=>c.passed),checks};writeFileSync('docs/modules/06/board-verification.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(!report.passed)process.exitCode=1;
 }
 main().catch(e=>{console.error(e.message);process.exitCode=1;});
+
 

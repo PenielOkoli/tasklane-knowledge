@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-10T19:15:47.930Z",
+  "checkedAt": "2026-11-10T19:19:36.022Z",
   "url": "https://tasklane-knowledge.vercel.app",
   "liveRequested": true,
   "passed": true,
@@ -43,14 +43,9 @@
         "mode": "ai",
         "claims": [
           {
-            "text": "Before launch the release quality gate requires completing a keyboard‑only journey, visible focus checks, form‑error checks, and loading and empty states, and any high‑priority defects must be fixed or the release is blocked.",
+            "text": "Before launch the release quality checklist must be passed, which includes completing a keyboard‑only journey, visible focus checks, form error checks, and loading and empty‑state checks, as well as a mobile review. Any high‑priority defect must be fixed; otherwise the release is blocked and the project lead will not give final approval.",
             "citations": [
-              "quality-2"
-            ]
-          },
-          {
-            "text": "The project lead may give final approval only after the mobile review and after the release quality checklist has passed.",
-            "citations": [
+              "quality-2",
               "brief-2"
             ]
           }
@@ -90,7 +85,7 @@
           }
         ],
         "confidence": "moderate",
-        "limitation": "Answer based solely on the supplied sample passages.",
+        "limitation": "Grounded in fictional sample documents, not live project data. Retrieval may miss relevant wording. ",
         "steps": [
           "Validated source access",
           "Searched 4 selected documents",
@@ -126,7 +121,7 @@
           }
         ],
         "confidence": "none",
-        "limitation": "The passages indicate the project budget has not been approved and no advertising budget is documented (brief-3). Therefore the approved advertising budget cannot be determined.",
+        "limitation": "The provided passages state that the project budget has not been approved and the final marketing spend is undocumented, so the approved advertising budget cannot be determined.",
         "steps": [
           "Validated source access",
           "Searched 4 selected documents",
