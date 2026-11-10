@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { writeFileSync } from 'node:fs';
 import type { Workspace } from '../src/lib/contracts';
-const base = process.argv[2] || 'https://tasklane.vercel.app';
+const base = process.argv[2] || 'https://tasklane-knowledge.vercel.app';
 const live = process.argv.includes('--live');
 type Client = { cookie: string; workspace: Workspace | null };
 const checks: {name:string; passed:boolean; detail?:unknown}[] = [];
@@ -46,6 +46,7 @@ async function main(){
     await check('real AI mutation proposal requires approval',async()=>{const r=await call(a,'propose',{prompt:'Set the priority of Review mobile layouts (tsk-mobile) to high. Propose only this one change.',revision:revision()});assert.equal(r.status,200);assert.equal(a.workspace!.proposal?.source,'ai');assert.equal(a.workspace!.proposal?.action.toolName,'setPriority');assert.equal(a.workspace!.tasks.find(t=>t.id==='tsk-mobile')!.priority,'medium');
       assert.equal((await call(a,'decide',decision())).status,200);assert.equal(a.workspace!.tasks.find(t=>t.id==='tsk-mobile')!.priority,'high');assert.equal((await call(a,'undo',{undoId:a.workspace!.undo!.id,revision:revision()})).status,200);assert.equal(a.workspace!.tasks.find(t=>t.id==='tsk-mobile')!.priority,'medium');});
   }
-  const report={checkedAt:new Date().toISOString(),url:base,liveRequested:live,passed:checks.every(c=>c.passed),checks};writeFileSync('docs/modules/05/live-verification.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(!report.passed)process.exitCode=1;
+  const report={checkedAt:new Date().toISOString(),url:base,liveRequested:live,passed:checks.every(c=>c.passed),checks};writeFileSync('docs/modules/06/board-verification.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(!report.passed)process.exitCode=1;
 }
 main().catch(e=>{console.error(e.message);process.exitCode=1;});
+

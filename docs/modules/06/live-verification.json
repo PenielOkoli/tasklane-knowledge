@@ -1,0 +1,139 @@
+{
+  "checkedAt": "2026-11-10T19:15:47.930Z",
+  "url": "https://tasklane-knowledge.vercel.app",
+  "liveRequested": true,
+  "passed": true,
+  "checks": [
+    {
+      "name": "pages and source metadata",
+      "passed": true,
+      "detail": {
+        "configured": true
+      }
+    },
+    {
+      "name": "source search does not claim AI generation",
+      "passed": true
+    },
+    {
+      "name": "unknown context abstains",
+      "passed": true
+    },
+    {
+      "name": "source selection restricts every passage",
+      "passed": true
+    },
+    {
+      "name": "empty selection, unknown source and extra fields rejected",
+      "passed": true
+    },
+    {
+      "name": "passage access requires session and rejects unknown ID",
+      "passed": true
+    },
+    {
+      "name": "cross origin and oversized bodies rejected",
+      "passed": true
+    },
+    {
+      "name": "real Groq grounded answer with valid citations",
+      "passed": true,
+      "detail": {
+        "status": "answered",
+        "mode": "ai",
+        "claims": [
+          {
+            "text": "Before launch the release quality gate requires completing a keyboard‑only journey, visible focus checks, form‑error checks, and loading and empty states, and any high‑priority defects must be fixed or the release is blocked.",
+            "citations": [
+              "quality-2"
+            ]
+          },
+          {
+            "text": "The project lead may give final approval only after the mobile review and after the release quality checklist has passed.",
+            "citations": [
+              "brief-2"
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "id": "quality-2",
+            "sourceId": "quality",
+            "heading": "Release quality gate",
+            "text": "Before launch, complete a keyboard-only journey, visible focus checks, form error checks, and loading and empty states. High-priority defects must be fixed or the release is blocked. The project lead records the final approval.",
+            "title": "Release quality checklist",
+            "coverage": 0.75
+          },
+          {
+            "id": "brief-2",
+            "sourceId": "brief",
+            "heading": "Release decision",
+            "text": "The target launch date is 24 November 2026. This is a target, not a confirmed commitment. The project lead approves the launch only after mobile review and the release quality checklist pass. An unresolved high-priority defect blocks release.",
+            "title": "Spring launch brief",
+            "coverage": 0.5
+          },
+          {
+            "id": "brief-3",
+            "sourceId": "brief",
+            "heading": "Open decisions",
+            "text": "The project budget has not been approved. Pricing, revenue forecasts, and a final marketing spend are not documented. The project lead must provide these decisions before financial questions can be answered.",
+            "title": "Spring launch brief",
+            "coverage": 0.5
+          },
+          {
+            "id": "brief-1",
+            "sourceId": "brief",
+            "heading": "Launch scope",
+            "text": "The Spring launch focuses on a simpler onboarding flow and a checkout prototype. The launch announcement follows the release decision. Payment processing and a production checkout are outside this prototype scope.",
+            "title": "Spring launch brief",
+            "coverage": 0.25
+          }
+        ],
+        "confidence": "moderate",
+        "limitation": "Answer based solely on the supplied sample passages.",
+        "steps": [
+          "Validated source access",
+          "Searched 4 selected documents",
+          "Retrieved 4 passages",
+          "Generated a grounded draft",
+          "Validated every citation against retrieved passages"
+        ]
+      }
+    },
+    {
+      "name": "missing budget does not invent amount",
+      "passed": true,
+      "detail": {
+        "status": "no_result",
+        "mode": "retrieval",
+        "claims": [],
+        "evidence": [
+          {
+            "id": "brief-3",
+            "sourceId": "brief",
+            "heading": "Open decisions",
+            "text": "The project budget has not been approved. Pricing, revenue forecasts, and a final marketing spend are not documented. The project lead must provide these decisions before financial questions can be answered.",
+            "title": "Spring launch brief",
+            "coverage": 0.6666666666666666
+          },
+          {
+            "id": "workflow-1",
+            "sourceId": "workflow",
+            "heading": "Task approvals",
+            "text": "Tasklane searches tasks without approval. Creating a task, moving it, changing its priority, or archiving it requires a preview and explicit human approval. Archiving additionally requires typing ARCHIVE. The latest approved change can be undone.",
+            "title": "Team working agreement",
+            "coverage": 0.3333333333333333
+          }
+        ],
+        "confidence": "none",
+        "limitation": "The passages indicate the project budget has not been approved and no advertising budget is documented (brief-3). Therefore the approved advertising budget cannot be determined.",
+        "steps": [
+          "Validated source access",
+          "Searched 4 selected documents",
+          "Retrieved 2 passages",
+          "Abstained: insufficient evidence or invalid citations"
+        ]
+      }
+    }
+  ]
+}
